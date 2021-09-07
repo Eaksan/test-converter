@@ -1,0 +1,97 @@
+.currency-swiper {
+  max-width: 375px;
+  position: relative;
+  z-index: 1;
+
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    height: calc(100% - 20px);
+    width: calc(50% - 30px);
+    background: linear-gradient(270deg, rgba(9, 1, 16, 0) 0%, #090110 91.86%);
+    pointer-events: none;
+  }
+
+  &:after {
+    left: auto;
+    right: 0;
+    background: linear-gradient(90deg, rgba(9, 1, 16, 0) 0%, #090110 91.86%)
+  }
+
+  .swiper-slide {
+    padding: 200px 0 20px;
+    width: auto !important;
+    min-width: 80px;
+    z-index: 1;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .swiper-pagination {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    &-bullet {
+      background-color: #fff;
+      opacity: 0.3;
+      width: 5px;
+      height: 5px;
+      transition: .2s;
+      margin: 0 3px;
+      border-radius: 10000px;
+
+      &-active {
+        opacity: 1;
+        width: 16px;
+      }
+    }
+  }
+}
+
+.currency-result {
+  font-size: 56px;
+  padding: 28px 0;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  margin: 30px auto 12px;
+  height: 122px;
+  z-index: 3;
+  pointer-events: none;
+
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url('./Union.png') left center no-repeat;
+    background-size: contain;
+  }
+
+  &:after {
+    transform: rotateY(180deg);
+  }
+
+  &__num {
+    position: absolute;
+    width: 100%;
+    transition: 0.1s;
+    display: flex;
+    justify-content: center;
+
+    &--letter {
+      display: inline-block;
+    }
+  }
+}

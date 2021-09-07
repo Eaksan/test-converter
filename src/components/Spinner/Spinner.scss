@@ -1,0 +1,25 @@
+.spinner {
+  display: inline-block;
+  border-top: 2px solid currentcolor;
+  border-right: 2px solid currentcolor;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-radius: 99999px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  animation: 0.45s linear 0s infinite normal none running animation-spin;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+@keyframes animation-spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

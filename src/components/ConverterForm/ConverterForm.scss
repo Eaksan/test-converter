@@ -1,0 +1,40 @@
+.converter-form {
+  max-width: 320px;
+  margin: 20px auto;
+
+  &__input, &__select {
+    display: block;
+    background-color: transparent;
+    border: 2px solid rgba(#fff, 0.6);
+    color: #fff;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    border-radius: 0.2rem;
+    line-height: 1.8rem;
+    padding: 0.2rem 0.5rem;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__group {
+    display: flex;
+
+    * {
+      max-width: 50%;
+      flex: 1 0 50%;
+    }
+
+    *:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    *:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+  }
+}
