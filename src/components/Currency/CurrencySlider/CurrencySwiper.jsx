@@ -80,10 +80,13 @@ const CurrencySwiper = () => {
                 </span>
                 {slideList()}
             </Swiper>
-            <CurrencyShare
-                selectedCurrency={convertedCurrency[swiper.activeIndex]}
-                result={currencyRates[convertedCurrency[swiper.activeIndex]]}
-            />
+            { swiper ? (
+                        <CurrencyShare
+                        selectedCurrency={convertedCurrency[swiper.activeIndex]}
+                        result={currencyRates[convertedCurrency[swiper.activeIndex]]}
+                        />
+                    ) : null
+            }
         </>
     );
 };
