@@ -7,13 +7,13 @@ const CurrencyShare = ({selectedCurrency, result}) => {
     const handleShare = (e) => {
         e.preventDefault();
         navigator.share({
+            title: 'Test-converter',
             text: `${number} ${currency} to ${selectedCurrency} = ${result}`
         })
     }
 
     if (
-        !navigator.canShare ||
-        !navigator.canShare()
+        !navigator.share
     ) {
         return null;
     }
