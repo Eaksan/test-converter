@@ -1,52 +1,37 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {useConverter} from "../../../providers/ConverterProvider";
-import CurrencyShare from "../CurrencyShare/CurrencyShare";
+import CurrencyResultNumber from "./CurrencyResultNumber";
 
-const CurrencyResult = ({swiper, transformGrid, nextSlide}) => {
-    const {currencyRates, convertedCurrency} = useConverter();
-
-    const splitNumber = useCallback((num, index) => {
-        return String(num).split('').map((letter, key) => {
-            return (
-                <span
-                    key={key}
-                    className="currency-result__num--letter"
-                    style={{
-                        transform: `translateY(${transformGrid[index] * (key + 1) / String(num).length}%)`
-                    }}
-                >
-                    {letter}
-                </span>
-            )
-        })
-    }, [swiper, currencyRates, transformGrid])
+const CurrencyResult = ({resultTranslate}) => {
+    const {convertedCurrency} = useConverter();
+    const [insideWidth, setInsideWidth] = useState();
+    const insideWidthRef = useCallback(node => {
+        if (node) {
+            const pseudoWidth = getComputedStyle(node, '::before').width.replace(/\D/g, '') * 2;
+            setInsideWidth(node.offsetWidth - pseudoWidth - 20)
+        }
+    }, [])
 
     const renderRateNumbers = useCallback(() => {
-        return convertedCurrency.map((cur, index, arr) => {
-            let styles = {}
-            if (swiper) {
-                styles = {
-                    transform: `translateY(${transformGrid[index]}%)`,
-                    opacity: swiper.activeIndex === index ?
-                        (100 - Math.abs(transformGrid[index]) * 1.3) / 100 :
-                        nextSlide === index ?
-                            -(Math.abs(transformGrid[index]) * 1.3 - 100) / 100 :
-                            0
-                }
-            }
+        return convertedCurrency.map((cur, index) => {
+            if (!cur) return null
             return (
-                <div className={"currency-result__num"} key={cur} style={styles}>
-                    {splitNumber(currencyRates[cur], index, arr.length)}
-                </div>
+                <CurrencyResultNumber
+                    cur={cur}
+                    key={cur}
+                    translate={resultTranslate[index]}
+                    insideWidth={insideWidth}
+                />
             )
         })
-    }, [swiper, currencyRates, transformGrid])
+    }, [resultTranslate, convertedCurrency])
+
     return (
-        <>
-            <div className="currency-result">
+        <div ref={insideWidthRef} className="currency-result">
+            <div className="currency-result__wrapper">
                 {renderRateNumbers()}
             </div>
-        </>
+        </div>
     );
 };
 
